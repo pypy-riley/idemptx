@@ -17,6 +17,7 @@ Supports Redis as backend for deduplication, distributed locking, and response c
 - 🧠 Request signature validation (method + URL + headers + body)
 - ⏳ Configurable `wait_timeout` behavior
 - 🔁 Response replay from cache (with headers)
+- 🔢 In-memory backend for testing/local use
 
 ---
 
@@ -65,17 +66,33 @@ async def create_order(request: Request):
 
 ---
 
+## 🔖 In-memory Backend (for testing only)
+
+```python
+from idemptx.backend import InMemoryBackend
+
+backend = InMemoryBackend()
+
+@app.post('/example')
+@idempotent(storage_backend=backend)
+async def create_something(request: Request):
+    return {'ok': True}
+```
+
+> Note: Not suitable for multi-process or production environments.
+
+---
+
 ## 🔐 Response Headers
 
-| Header | Description |
-|--------|-------------|
-| `Idempotency-Key` | Echoed back to client |
+| Header                    | Description                            |
+|---------------------------|----------------------------------------|
+| `Idempotency-Key`         | Echoed back to client                  |
 | `X-Idempotency-Signature` | Hash of request for conflict detection |
-| `X-Idempotency-Status` | `"hit"` or `"new"` |
+| `X-Idempotency-Status`    | `"hit"` or `"new"`                     |
 
 ---
 
 ## 📄 License
 
 MIT License © 2025 [pypy-riley](https://github.com/pypy-riley)
-
