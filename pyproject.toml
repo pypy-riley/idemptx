@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "idemptx"
+version = "0.1.2"
+description = "Idempotency decorator for FastAPI"
+authors = ["pypy-riley <pypy.riley@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/pypy-riley/idemptx"
+repository = "https://github.com/pypy-riley/idemptx"
+documentation = "https://github.com/pypy-riley/idemptx#readme"
+keywords = ["fastapi", "idempotency", "decorator", "redis", "cache"]
+
+packages = [
+  { include = "idemptx", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "*"
+redis = "^4.2 || ^5.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+ruff = "^0.3.4"
+pre-commit = "^3.7.0"
+
+[tool.black]
+line-length = 120
+skip-string-normalization = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+lint.select = ["E", "F", "I", "W", "YTT", "RUF", "UP", "C90"]
+lint.ignore = ["E501"]
+format.quote-style = "single"

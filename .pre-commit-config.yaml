@@ -1,0 +1,6 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.4
+    hooks:
+      - id: ruff         # Lint + Fix
+      - id: ruff-format  # 格式化（取代 black/isort）

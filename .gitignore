@@ -1,0 +1,32 @@
+# Python cache / build
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtualenv
+.venv/
+venv/
+ENV/
+
+# Poetry
+poetry.lock
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Test / coverage
+.coverage
+.cache/
+htmlcov/
+
+# VSCode / IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
