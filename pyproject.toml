@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "idemptx"
-version = "0.2.0"
+version = "0.2.1"
 description = "Idempotency decorator for FastAPI"
 authors = ["pypy-riley <pypy.riley@gmail.com>"]
 license = "MIT"
