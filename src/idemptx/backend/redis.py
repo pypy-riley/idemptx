@@ -42,12 +42,10 @@ class RedisBackend(StorageBackend, BaseRedisBackend):
 
     def __init__(
         self,
-        host: Annotated[str, 'Redis host'] = 'localhost',
-        port: Annotated[int, 'Redis port'] = 6379,
-        db: Annotated[int, 'Redis DB index'] = 0,
+        redis_instance: redis.Redis,
         prefix: Annotated[str, 'Key prefix namespace'] = 'idempotency:',
     ):
-        self.redis = redis.Redis(host=host, port=port, db=db)
+        self.redis = redis_instance
         super().__init__(prefix=prefix)
 
     def get(self, key: str) -> dict | None:
@@ -72,12 +70,10 @@ class AsyncRedisBackend(AsyncStorageBackend, BaseRedisBackend):
 
     def __init__(
         self,
-        host: Annotated[str, 'Redis host'] = 'localhost',
-        port: Annotated[int, 'Redis port'] = 6379,
-        db: Annotated[int, 'Redis DB index'] = 0,
+        redis_instance: aioredis.Redis,
         prefix: Annotated[str, 'Key prefix namespace'] = 'idempotency:',
     ):
-        self.redis = aioredis.Redis(host=host, port=port, db=db)
+        self.redis = redis_instance
         super().__init__(prefix=prefix)
 
     async def get(self, key: str) -> dict | None:

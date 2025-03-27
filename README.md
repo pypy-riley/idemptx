@@ -32,12 +32,14 @@ pip install idemptx
 ## 🚀 Quick Start
 
 ```python
+import redis
 from fastapi import FastAPI, Request
 from idemptx import idempotent
-from idemptx.backend.redis import RedisBackend
+from idemptx.backend import RedisBackend
 
 app = FastAPI()
-redis_backend = RedisBackend()
+client = redis.Redis(host='localhost', port=6379, db=0)
+redis_backend = RedisBackend(client)
 
 @app.post('/orders')
 @idempotent(storage_backend=redis_backend)
@@ -63,6 +65,18 @@ async def create_order(request: Request):
 - `key_ttl`: How long to hold cache and lock (in seconds)
 - `wait_timeout`: Wait for lock to be released (0 = immediate failure)
 - `validate_signature`: Whether to compare request content on replays
+
+---
+
+## 🔀 Async Redis Backend
+
+```python
+import redis.asyncio as aioredis
+from idemptx.backend import AsyncRedisBackend
+
+async_client = aioredis.Redis(host='localhost', port=6379, db=0)
+async_backend = AsyncRedisBackend(async_client)
+```
 
 ---
 
