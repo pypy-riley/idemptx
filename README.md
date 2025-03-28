@@ -107,6 +107,18 @@ async def create_something(request: Request):
 
 ---
 
+## ❗️Limitations
+
+Currently, only `JSONResponse` is supported for caching.
+
+If your endpoint uses `response_model`, the return value is typically a Pydantic model, which FastAPI wraps *after* the decorator has executed. This means the idempotency decorator cannot cache the final serialized response or set headers reliably in this case.
+
+To enable caching, please return a `JSONResponse` explicitly from your endpoint.
+
+Support for `response_model` and automatic response wrapping may be added in a future version.
+
+---
+
 ## 📄 License
 
 MIT License © 2025 [pypy-riley](https://github.com/pypy-riley)
