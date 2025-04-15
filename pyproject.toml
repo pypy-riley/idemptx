@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "idemptx"
-version = "0.2.1"
+version = "0.2.2"
 description = "Idempotency decorator for FastAPI"
 authors = ["pypy-riley <pypy.riley@gmail.com>"]
 license = "MIT"
@@ -18,11 +18,16 @@ packages = [
 python = "^3.9"
 fastapi = "*"
 redis = "^4.2 || ^5.0"
+pydantic = "^2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
 ruff = "^0.3.4"
 pre-commit = "^3.7.0"
+pytest = "^8.3.5"
+pytest-asyncio = "^0.26.0"
+httpx = "^0.28.1"
+fakeredis = "^2.28.1"
 
 [tool.black]
 line-length = 120
@@ -34,3 +39,6 @@ target-version = "py39"
 lint.select = ["E", "F", "I", "W", "YTT", "RUF", "UP", "C90"]
 lint.ignore = ["E501"]
 format.quote-style = "single"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
